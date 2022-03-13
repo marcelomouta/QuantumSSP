@@ -9,10 +9,10 @@ This implementation assumes the number of solutions is known beforehand, althoug
 
 ## Oracle
 
-The constructed oracle for the subset search uses n + n + 1 qubits, where n is the length of the binary representation of the desired value. It uses the first n qubits as an auxiliary space to set the vector value corresponding to an index. It then sums that value to the following n qubits and resets the first n qubits in order to be able to sum over the remaining indices of the subset, while economizing space. Once all the values given by the selected indices are summed, a phase flip is then applied to last qubit controlled on whether the subset sum equals the desired value.
+The constructed oracle for the subset search uses n + n + 1 qubits, where n is the length of the binary representation of the desired value. It uses the first n qubits as an auxiliary space to set the vector value corresponding to an index. It then sums that value to the following n qubits and resets the first n qubits in order to be able to sum over the remaining indices of the subset, while economizing space. Once all the values given by the selected indices are summed, a phase flip is then applied to the last qubit controlled on whether the subset sum equals the desired value.
 
 ## Draper Adder
-The Drapper Adder[^1] was used to perform the sum of the possible subset values, and the implementation was based on the description provided by Ruiz-Perez et al. (2017)[^2] 
+The Draper Adder[^1] was used to perform the sum of the possible subset values, and the implementation was based on the description provided by Ruiz-Perez et al. (2017)[^2] 
 
 The following exemplifies the obtained circuit for adding 10 and 6, represented as |01010> and |00110>, respectively:
 ```
