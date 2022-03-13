@@ -1,5 +1,5 @@
 # QuantumSSP
-A quantum circuit that solves a variation of the Subset Sum Problem (SSP) in which all the inputs are possitve and all the subsets are found.
+A quantum circuit that solves a variation of the Subset Sum Problem (SSP) in which all the inputs are positive and all the subsets are found.
 
 More specifically, it finds the subsets where the sum is equal to the value 16 in the vector [5, 7, 8, 9, 1], being easily generalized for different vectors and values.
 
