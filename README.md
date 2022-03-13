@@ -1,11 +1,15 @@
 # QuantumSSP
-A quantum circuit that solves a variation of the Subset Sum Problem (SSP).
+A quantum circuit that solves a variation of the Subset Sum Problem (SSP) in which all the inputs are possitve and all the subsets are found.
 
 More specifically, it finds the subsets where the sum is equal to the value 16 in the vector [5, 7, 8, 9, 1], being easily generalized for different vectors and values.
 
 To do this, it assumes a representation using 5 qubits for the indices of the vector and then performs a Grover search over all the possible combinations of indices. In order to detect which indices should make the cut, an oracle is constructed which only flips the phase of the quantum state when a specific combination of indices has values which sum to the desired value.
 
 This implementation assumes the number of solutions is known beforehand, although a more generalized solution can be obtained by performing a Quantum Counting to obtain the number of solutions before performing the search.[^count]
+
+## Oracle
+
+The constructed oracle for the subset search uses n + n + 1 qubits, where n is the length of the binary representation of the desired value. It uses the first n qubits as an auxiliary space to set the vector value corresponding to an index. It then sums that value to the following n qubits and resets the first n qubits in order to be able to sum over the remaining indices of the subset, while economizing space. Once all the values given by the selected indices are summed, a phase flip is then applied to last qubit controlled on whether the subset sum equals the desired value.
 
 ## Draper Adder
 The Drapper Adder[^1] was used to perform the sum of the possible subset values, and the implementation was based on the description provided by Ruiz-Perez et al. (2017)[^2] 
@@ -26,9 +30,6 @@ The following exemplifies the obtained circuit for adding 10 and 6, represented 
 ```
 This is achieved by transforming the states |01010>|00110> into |01010>**|10000>** and measuring qubits 5 to 9, yelding the desired 16 in binary representation.
 
-## Oracle
-
-The constructed oracle for the subset search uses n + n + 1 qubits, where n is the length of the binary representation of the desired value. It uses the first n qubits as an auxiliary space to set the vector value corresponding to an index. It then sums that value to the following n qubits and resets the first n qubits in order to be able to sum over the remaining indices of the subset, while economizing space. Once all the values given by the selected indices are summed, a phase flip is then applied to last qubit controlled on whether the subset sum equals the desired value.
 
 [^count]: https://qiskit.org/textbook/ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions.html
 
